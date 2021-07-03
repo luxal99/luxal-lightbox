@@ -1,0 +1,24 @@
+<div class="text-right">
+  <button class="float-btn" mat-dialog-close mat-button>
+    <mat-icon>close</mat-icon>
+  </button>
+  <button class="mid-left nav-btn" mat-button (click)="prev()">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <button class="nav-btn mid-right" (click)="next()" mat-button>
+    <mat-icon>navigate_next</mat-icon>
+  </button>
+  <button (click)="downloadPhoto()" class="float-down-btn" mat-button>
+    <mat-icon>file_download</mat-icon>
+  </button>
+  <a id="imgLink" download="imagename.png" [href]="medias[increment].uri"></a>
+</div>
+<div class="slide" (swipeleft)="prev()" (swiperight)="next()" id="slide"
+     [style.background-image]="'url(' + medias[increment].uri+ ')'">
+  <div class="row">
+    <div id="btn-col-1" class="col-6 text-left">
+    </div>
+    <div id="btn-col-2" class="col-6 text-right">
+    </div>
+  </div>
+</div>
