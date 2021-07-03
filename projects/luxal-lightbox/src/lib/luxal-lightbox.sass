@@ -1,25 +1,66 @@
+::ng-deep.mat-dialog-container
+  padding: 0 !important
+
 .slide
   background-size: cover
   overflow: hidden
-  -webkit-transition: .6s linear
+  max-width: 100%
+  padding-top: 56.25%
+  background-position: center
+
 
 .nav-btn
-  background-color: #fff
-  color: #121212
+  background-color: transparent
+  color: #fff
 
 .float-btn
   margin-top: 30px
-  background-color: #121212
+  color: #fff
   margin-right: 30px
   position: absolute
   top: 0
   right: 0
 
+.mid-left
+  top: 50%
+  left: 1rem
+  transform: translateY(-50%)
+  position: absolute
+
+.mid-right
+  top: 50%
+  right: 2rem
+  transform: translateY(-50%)
+  position: absolute
+
+.float-down-btn
+  position: fixed
+  bottom: 4rem
+  z-index: 3
+  right: 2rem
+  background-color: transparent
+  color: #ffffff
 
 @media screen and (max-width: 570px)
-  .slide
-    padding: 2em 1em
-    height: 100vh
+  .nav-btn
+    display: none
 
-  .watermark-div
-    padding-top: 60%
+@media (-webkit-min-device-pixel-ratio: 1.25)
+
+.slide
+  zoom: .8
+
+@media (-webkit-device-pixel-ratio: 1.5)
+
+.slide
+  zoom: .7
+
+@media (-webkit-device-pixel-ratio: 1.75)
+
+.slide
+  zoom: .7
+
+@media (-webkit-min-device-pixel-ratio: 1.8)
+
+.slide
+  zoom: .6
