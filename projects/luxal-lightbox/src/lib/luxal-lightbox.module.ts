@@ -1,20 +1,27 @@
 import {NgModule} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon/public-api';
+import { MatIconModule } from '@angular/material/icon';
 import {LuxalLightboxComponent} from './luxal-lightbox.component';
+import { ImagePipe } from './image.pipe';
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
-    LuxalLightboxComponent
+    LuxalLightboxComponent,
+    ImagePipe
   ],
   imports: [
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
+    CommonModule,
   ],
   exports: [
-    LuxalLightboxComponent
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    LuxalLightboxComponent,
   ]
 })
 export class LuxalLightboxModule {}

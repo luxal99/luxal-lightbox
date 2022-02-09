@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Pre-requirements
 
-1. Angular 12
+1. Angular 13
 2. Installed angular material
 
 ## Integration to your project

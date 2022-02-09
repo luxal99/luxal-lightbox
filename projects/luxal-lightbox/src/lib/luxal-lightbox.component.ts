@@ -15,7 +15,21 @@ export class LuxalLightboxComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getMeta(this.medias[0].uri);
+    // this.getMeta(this.medias[0].uri);
+    this.addArrowListener();
+  }
+
+  addArrowListener(): void {
+    document.addEventListener('keydown', (event) => {
+      switch (event.keyCode) {
+        case 37:
+          this.prev();
+          break;
+        case 39:
+          this.next();
+          break;
+      }
+    });
   }
 
   next(): void {
@@ -24,7 +38,6 @@ export class LuxalLightboxComponent implements OnInit {
     } else {
       this.increment = 0;
     }
-    this.getMeta();
   }
 
 
@@ -34,7 +47,6 @@ export class LuxalLightboxComponent implements OnInit {
     } else {
       this.increment = this.medias.length - 1;
     }
-    this.getMeta();
   }
 
   getMeta(url?: string): void {
@@ -48,15 +60,15 @@ export class LuxalLightboxComponent implements OnInit {
   }
 
   setResponsiveImage(img: any): void {
-    const slide = document.getElementById('slide');
+    const slide = document.getElementById("slide")
     if (window.screen.width <= 960) {
-      this.setMobileAspectRatio(img, slide);
+      this.setMobileAspectRatio(img,slide);
     } else {
-      this.setDesktopAspectRatio(img, slide);
+      this.setDesktopAspectRatio(img,slide);
     }
   }
 
-  setMobileAspectRatio(img: any, element: any): void {
+  setMobileAspectRatio(img: any,element:any): void {
     if (img.width < img.height) {
       // @ts-ignore
       element.style.paddingTop = '156.25%';
@@ -68,13 +80,13 @@ export class LuxalLightboxComponent implements OnInit {
     }
   }
 
-  setDesktopAspectRatio(img: any, element: any): void {
+  setDesktopAspectRatio(img: any,element:any): void {
     if (img.width < img.height) {
       // @ts-ignore
       element.style.aspectRatio = '9/16';
       // @ts-ignore
       element.style.height = `${window.screen.height + 150}px`;
-
+      element.style.paddingTop = '23.25%'
       // @ts-ignore
       element.style.removeProperty('width');
     } else {
@@ -82,6 +94,7 @@ export class LuxalLightboxComponent implements OnInit {
       element.style.width = `${window.screen.width}px`;
       // @ts-ignore
       element.style.aspectRatio = '4/3';
+      element.style.paddingTop = '0'
       // @ts-ignore
       element.style.removeProperty('height');
     }
