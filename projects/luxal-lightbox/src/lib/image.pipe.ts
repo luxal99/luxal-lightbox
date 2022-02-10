@@ -4,7 +4,7 @@ import {
   LANDSCAPE_ASPECT_RATIO_PERCENTAGE,
   PORTRAIT_ASPECT_RATIO,
   PORTRAIT_ASPECT_RATIO_PERCENTAGE,
-} from './constant/const';
+} from './constant/constant';
 import { ImageProperty } from './model/ImageProperty';
 
 @Pipe({
