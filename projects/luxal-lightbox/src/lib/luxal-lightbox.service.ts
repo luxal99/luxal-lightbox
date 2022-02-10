@@ -1,13 +1,12 @@
-import {Injectable} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {LuxalLightboxComponent} from './luxal-lightbox.component';
+import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { LuxalLightboxComponent } from './luxal-lightbox.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LuxalLightboxService {
-
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog) {}
 
   openGallery(data: any[]): void {
     this.dialog.open(LuxalLightboxComponent, {
@@ -16,5 +15,4 @@ export class LuxalLightboxService {
       maxWidth: window.screen.width <= 1024 ? '100vw' : 'auto',
     });
   }
-
 }

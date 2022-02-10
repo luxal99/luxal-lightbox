@@ -13,13 +13,15 @@
   </button>
   <a id="imgLink" download="imagename.png" [href]="medias[increment].uri"></a>
 </div>
-<div class="slide" (swipeleft)="prev()" (swiperight)="next()" id="slide"
-     [style.background-image]="'url(' + medias[increment].uri+ ')'" [ngStyle]="(medias[increment].uri|image)">
+<div
+  class="slide"
+  (swipeleft)="prev()"
+  (swiperight)="next()"
+  [style.background-image]="'url(' + medias[increment].uri+ ')'"
+  [ngStyle]="(medias[increment]|image)"
+>
   <div class="row">
-    <div id="btn-col-1" class="col-6 text-left">
-    </div>
-    <div id="btn-col-2" class="col-6 text-right">
-    </div>
+    <div id="btn-col-1" class="col-6 text-left"></div>
+    <div id="btn-col-2" class="col-6 text-right"></div>
   </div>
 </div>
-

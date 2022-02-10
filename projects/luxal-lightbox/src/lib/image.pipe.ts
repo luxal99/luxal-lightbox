@@ -1,22 +1,36 @@
-import {Pipe, PipeTransform} from '@angular/core';
-import {retry} from "rxjs";
+import { Pipe, PipeTransform } from '@angular/core';
+import {
+  LANDSCAPE_ASPECT_RATIO,
+  LANDSCAPE_ASPECT_RATIO_PERCENTAGE,
+  PORTRAIT_ASPECT_RATIO,
+  PORTRAIT_ASPECT_RATIO_PERCENTAGE,
+} from './constant/const';
+import { ImageProperty } from './model/ImageProperty';
 
 @Pipe({
-  name: 'image'
+  name: 'image',
 })
 export class ImagePipe implements PipeTransform {
-
-
-  transform(imageSrc: any): any {
-    let image = new Image()
-    let style = {}
-    image.src = imageSrc
-    if (image.height > image.width) {
-      style = {height: `${window.screen.height + 150}px`, paddingTop: '23.25%', aspectRatio: '9/16'}
+  transform(image: any): ImageProperty {
+    if (window.screen.width <= 960) {
+      if (image.width < image.height) {
+        return { paddingTop: PORTRAIT_ASPECT_RATIO_PERCENTAGE };
+      } else {
+        return { paddingTop: LANDSCAPE_ASPECT_RATIO_PERCENTAGE };
+      }
     } else {
-      style = {width: `${window.screen.width}px`, aspectRatio: '4/3', paddingTop: 0}
+      if (image.height > image.width) {
+        return {
+          height: `${window.screen.height + 150}px`,
+          aspectRatio: PORTRAIT_ASPECT_RATIO,
+        };
+      } else {
+        return {
+          width: `${window.screen.width}px`,
+          aspectRatio: LANDSCAPE_ASPECT_RATIO,
+          paddingTop: 0,
+        };
+      }
     }
-    return style;
   }
-
 }
