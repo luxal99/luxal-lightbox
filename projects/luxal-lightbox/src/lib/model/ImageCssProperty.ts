@@ -1,4 +1,4 @@
-export interface ImageProperty {
+export interface ImageCssProperty {
   aspectRatio?: string;
   width?: string;
   height?: string;

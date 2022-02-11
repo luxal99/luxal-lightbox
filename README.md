@@ -9,13 +9,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Integration to your project
 
-1. Clone the repository
-2. Run 'ng build'
-3. Move dist/luxal-lightbox directory to your project. Example:
-   ./your-project/lib/luxal-lightbox
-
-4. Import LuxalLightboxModule into app.module.ts
-5. After that you need to add LightBoxService to constructor in component which you want to open gallery.
+``npm i luxal-lightbox``
+1. Import LuxalLightboxModule into app.module.ts
+2. After that you need to add LightBoxService to constructor in component which you want to open gallery.
 
 ### Example
 
@@ -32,7 +28,10 @@ export class CompoentWhichOpenGallery {
      * JSON looks like
      * {'uri':'https://someuri.com/img34.jpg'}
      */
-    this.lightboxService.open([])
+    this.lightboxService.open([{uri: 'https://www.placecage.com/640/360\n'},
+      {uri: 'https://i.pinimg.com/originals/01/61/6b/01616b7daa1d2ef8846022bffc253d68.png'},
+      {uri: 'https://www.swiss.com/content/dam/lx/images/pixels_variations/c-1079783203-2295925.jpg.transform/lh-dcep-transform-width-1440/img.jpg'},
+    ])
   }
 }
 ```

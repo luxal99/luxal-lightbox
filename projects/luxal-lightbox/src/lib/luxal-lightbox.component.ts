@@ -1,5 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {ImageDto} from "./model/ImageDto";
 
 @Component({
   selector: 'lib-luxal-lightbox',
@@ -8,25 +9,15 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class LuxalLightboxComponent implements OnInit {
   increment = 0;
-  isMobile = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public medias: any[]) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ImageDto[]) {
+  }
 
   ngOnInit(): void {
-    this.getImageData();
     this.addArrowListener();
   }
 
-  getImageData() {
-    for (let image of this.medias) {
-      let img = new Image();
-      img.src = image.uri;
-      img.onload = () => {
-        image.width = img.width;
-        image.height = img.height;
-      };
-    }
-  }
+
   addArrowListener(): void {
     document.addEventListener('keydown', (event) => {
       switch (event.keyCode) {
@@ -41,7 +32,7 @@ export class LuxalLightboxComponent implements OnInit {
   }
 
   next(): void {
-    if (!(this.increment + 1 >= this.medias.length)) {
+    if (!(this.increment + 1 >= this.data.length)) {
       this.increment++;
     } else {
       this.increment = 0;
@@ -52,7 +43,7 @@ export class LuxalLightboxComponent implements OnInit {
     if (this.increment - 1 >= 0) {
       this.increment--;
     } else {
-      this.increment = this.medias.length - 1;
+      this.increment = this.data.length - 1;
     }
   }
 
