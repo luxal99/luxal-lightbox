@@ -16,8 +16,8 @@
   </div>
   <div
     class="slide"
-    (swipeleft)="prev()"
-    (swiperight)="next()"
+    (swipeleft)="next()"
+    (swiperight)="prev()"
     [style.background-image]="'url(' + data[increment].uri+ ')'"
     [ngStyle]="data[increment].imageCssProperty"
   >

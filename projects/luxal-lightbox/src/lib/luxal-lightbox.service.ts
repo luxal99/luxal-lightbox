@@ -1,49 +1,42 @@
-import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { LuxalLightboxComponent } from './luxal-lightbox.component';
-import {
-  LANDSCAPE_ASPECT_RATIO,
-  LANDSCAPE_ASPECT_RATIO_PERCENTAGE,
-  PORTRAIT_ASPECT_RATIO,
-  PORTRAIT_ASPECT_RATIO_PERCENTAGE,
-} from './constant/constant';
-import { ImageDto } from './model/ImageDto';
+import {Injectable} from "@angular/core";
+import {MatDialog} from "@angular/material/dialog";
+import {LuxalLightboxComponent} from "./luxal-lightbox.component";
+import {LANDSCAPE_ASPECT_RATIO, PORTRAIT_ASPECT_RATIO,} from "./constant/constant";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class LuxalLightboxService {
-  private listOfImages: ImageDto[] = [];
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog) {
+  }
 
   openGallery(data: any[]): void {
-    this.getImageData(data).then(() => {
+    this.getImageData(data).then((resp) => {
       this.dialog
         .open(LuxalLightboxComponent, {
-          data: this.listOfImages,
-          width: window.screen.width <= 1024 ? '100%' : 'auto',
+          data: resp,
+          width: window.screen.width <= 1024 ? "100vw" : "auto",
         })
         .afterClosed()
         .subscribe(() => {
-          this.listOfImages = [];
         });
     });
   }
 
-  async getImageData(medias: any[]): Promise<void> {
+  // @ts-ignore
+  async getImageData(medias: any[]): Promise<any[]> {
     for (let image of medias) {
       let img = new Image();
       img.src = image.uri;
       img.onload = () => {
         image.width = img.width;
         image.height = img.height;
-
         this.getImageProperties(image);
       };
 
       if (medias.indexOf(image) === medias.length - 1) {
-        return new Promise<void>((resolve) => resolve());
+        return new Promise<any[]>((resolve) => resolve(medias));
       }
     }
   }
@@ -59,8 +52,8 @@ export class LuxalLightboxService {
       };
     }
     if (window.screen.width >= 700) {
-      image.imageCssProperty["height"]="1080px"
+      image.imageCssProperty["height"] = "1080px";
     }
-    this.listOfImages.push(image);
+
   }
 }
