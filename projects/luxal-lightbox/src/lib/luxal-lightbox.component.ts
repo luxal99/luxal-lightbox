@@ -1,6 +1,7 @@
 import {Component, HostListener, Inject, OnInit} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ImageDto} from "./model/ImageDto";
+import {DocumentService} from "./ssr/document.service";
 
 @Component({
   selector: "lib-luxal-lightbox",
@@ -12,7 +13,8 @@ export class LuxalLightboxComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: ImageDto[],
-    private dialogRef: MatDialogRef<LuxalLightboxComponent>
+    private dialogRef: MatDialogRef<LuxalLightboxComponent>,
+    private documentService:DocumentService
   ) {
   }
 
@@ -21,7 +23,7 @@ export class LuxalLightboxComponent implements OnInit {
   }
 
   addArrowListener(): void {
-    document.addEventListener("keydown", (event) => {
+    this.documentService.getDocument().addEventListener("keydown", (event) => {
       switch (event.keyCode) {
         case 37:
           this.prev();
@@ -51,18 +53,18 @@ export class LuxalLightboxComponent implements OnInit {
 
   downloadPhoto(): void {
     // @ts-ignore
-    document.getElementById("imgLink").click();
+    this.documentService.getDocument().getElementById("imgLink").click();
   }
 
-  @HostListener("window:orientationchange", ["$event"])
-  onOrientationChange(event) {
-    this.dialogRef.updateSize("auto", "auto");
-    for (let image of this.data) {
-      if (window.screen.width > window.screen.height){
-        image.imageCssProperty["height"] = `${window.screen.width / 2}px`;
-      }else{
-        image.imageCssProperty["height"] = "1080px";
-      }
-    }
-  }
+  // @HostListener("window:orientationchange", ["$event"])
+  // onOrientationChange(event) {
+  //   this.dialogRef.updateSize("auto", "auto");
+  //   for (let image of this.data) {
+  //     if (window.screen.width > window.screen.height){
+  //       image.imageCssProperty["height"] = `${window.screen.width * .7}px`;
+  //     }else{
+  //       image.imageCssProperty["height"] = "1080px";
+  //     }
+  //   }
+  // }
 }

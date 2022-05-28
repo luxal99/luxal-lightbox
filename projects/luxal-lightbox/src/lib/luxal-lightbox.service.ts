@@ -5,23 +5,22 @@ import {
   LANDSCAPE_ASPECT_RATIO,
   PORTRAIT_ASPECT_RATIO,
 } from './constant/constant';
+import {DocumentService} from "./ssr/document.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class LuxalLightboxService {
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog,private documentService:DocumentService) {}
 
   openGallery(data: any[]): void {
     this.getImageData(data).then((resp) => {
-      this.dialog
-        .open(LuxalLightboxComponent, {
-          width: window.screen.width <= 600 ? '100vw' : 'auto',
-          maxWidth: window.screen.width <= 600 ? '100vw' : 'auto',
-          data: resp,
-        })
-        .afterClosed()
-        .subscribe(() => {});
+        this.dialog
+          .open(LuxalLightboxComponent, {
+            width: this.documentService.getWindow().screen.width <= 600 ? '100vw' : 'auto',
+            maxWidth: this.documentService.getWindow().screen.width <= 600 ? '100vw' : 'auto',
+            data: resp,
+          })
     });
   }
 
@@ -52,21 +51,18 @@ export class LuxalLightboxService {
         aspectRatio: LANDSCAPE_ASPECT_RATIO,
       };
     }
-    if (
-      window.screen.width >= 700 &&
-      window.screen.width <= window.screen.height
-    ) {
-      console.log("Mobile");
-      image.imageCssProperty['height'] = '1080px';
-    } else if (
-      window.screen.width <= 1000 &&
-      window.screen.width > window.screen.height
-    ) {
-      console.log("Landscape mobile");
-      image.imageCssProperty['height'] = `${window.screen.width / 2}px`;
-    }else{
-      console.log("Desktop");
-      image.imageCssProperty['height'] = '1080px';
-    }
+   if (typeof this.documentService.getWindow() !== undefined){
+     if (
+       this.documentService.getWindow().screen.width >= 700 &&
+       this.documentService.getWindow().screen.height <= this.documentService.getWindow().screen.width
+     ) {
+       image.imageCssProperty['height'] = '1080px';
+     } else if (
+       this.documentService.getWindow().screen.width <= 1000 &&
+       this.documentService.getWindow().screen.width > this.documentService.getWindow().screen.height
+     ) {
+       image.imageCssProperty['height'] = `${this.documentService.getWindow().screen.width * .7}px`;
+     }
+   }
   }
 }
